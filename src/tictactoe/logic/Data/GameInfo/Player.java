@@ -1,8 +1,9 @@
-package Data.GameInfo;
+package tictactoe.logic.Data.GameInfo;
 
 public enum Player {
     PLAYER_X("X"),
-    PLAYER_O("O");
+    PLAYER_O("O"),
+    TIE("T");
 
     private final String piece;
 
