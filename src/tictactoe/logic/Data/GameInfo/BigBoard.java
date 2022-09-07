@@ -58,7 +58,15 @@ public class BigBoard {
     public void setSelectedBoard(){
         int row = getRow(selectedBoardNumber);
         int col = getCol(selectedBoardNumber);
-        this.selectedBoard = boards[row][col];
+        for(int i = 0; i < NUM_ROW; i++){
+            for(int j = 0; j < NUM_COL; j++){
+                if(row == i && col == j){
+                    boards[row][col].setActive(true);
+                    continue;
+                }
+                boards[row][col].setActive(false);
+            }
+        }
     }
 
     public int getSelectedBoardNumber(){

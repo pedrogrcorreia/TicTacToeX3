@@ -6,9 +6,13 @@ public class Board {
     private final int NUM_ROW = 3;
 
     private Player winner;
+    private boolean active;
+    private boolean full;
 
     public Board(){
         board = new String[NUM_ROW][NUM_COL];
+        active = true;
+        full = false;
         for(int i = 0; i< NUM_ROW; i++){
             for(int j = 0; j<NUM_COL; j++){
                 board[i][j] = "*";
@@ -106,8 +110,21 @@ public class Board {
                 }
             }
         }
-        winner = Player.TIE;
+//        winner = Player.TIE;
+        full = true;
         return true;
+    }
+
+    public boolean getActive(){
+        return active;
+    }
+
+    public void setActive(boolean state){
+        active = state;
+    }
+
+    public boolean getFull(){
+        return full;
     }
 
     public String[][] getStringBoard(){
