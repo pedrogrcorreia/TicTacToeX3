@@ -19,7 +19,7 @@ public abstract class StateAdapter implements IState {
     }
 
     @Override
-    public IState playerTurn(int place) {
+    public IState playerTurn(int place, int playBoard) {
         return this;
     }
 

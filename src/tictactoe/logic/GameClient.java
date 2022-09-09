@@ -20,8 +20,8 @@ public class GameClient {
         setState(state.createNewGame(gameMode));
     }
 
-    public void playerTurn(int place){
-        setState(state.playerTurn(place));
+    public void playerTurn(int place, int playBoard){
+        setState(state.playerTurn(place, playBoard));
     }
 
     public void pcTurn(){
@@ -34,14 +34,6 @@ public class GameClient {
 
     public State getCurrentState(){
         return state.getCurrentState();
-    }
-
-    public Board getSelectedBoard(){
-        return game.getSelectedBoard();
-    }
-
-    public int getSelectedBoardNumber(){
-        return game.getSelectedBoardNumber();
     }
 
     public Board getBoard(int row, int col){ return game.getBoard(row, col); }

@@ -29,16 +29,16 @@ public class GameObservable {
         update();
     }
 
-    public void playerTurn(int place){
-        gameClient.playerTurn(place);
+    public void playerTurn(int place, int playBoard){
+        gameClient.playerTurn(place, playBoard);
         update();
     }
 
     public State getCurrentState(){ return gameClient.getCurrentState(); }
 
-    public Board getSelectedBoard(){ return gameClient.getSelectedBoard(); }
-
-    public int getSelectedBoardNumber(){ return gameClient.getSelectedBoardNumber(); }
-
     public Board getBoard(int row, int col){ return gameClient.getBoard(row, col); }
+
+    public void setBoard(int nboard){
+        update();
+    }
 }

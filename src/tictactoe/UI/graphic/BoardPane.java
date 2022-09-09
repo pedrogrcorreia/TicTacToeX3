@@ -9,21 +9,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import tictactoe.logic.Data.GameInfo.BigBoard;
 import tictactoe.logic.Data.GameInfo.Board;
 import tictactoe.logic.GameObservable;
 
 import java.io.InputStream;
 
-import static javafx.scene.paint.Color.BLUE;
 
 public class BoardPane extends GridPane {
 
-    private GameObservable gameObservable;
+    private BigBoardPane bigBoardPane;
 
-    public BoardPane(GameObservable gameObservable){
-        this.gameObservable = gameObservable;
+    public BoardPane(BigBoardPane bigBoardPane) {
+        this.bigBoardPane = bigBoardPane;
         createWindow();
-//        drawBoard(gameObservable);
     }
 
     private void createWindow(){
@@ -48,16 +47,9 @@ public class BoardPane extends GridPane {
     }
 
     public void drawBoard(Board b){
-//        setGridLinesVisible(true);
         for(int i = 0; i<3; i++){
             for(int j = 0; j<3; j++){
-//                final int row = j;
-//                final int col = i;
                 String[][] board = b.getStringBoard();
-//                Label lbl = new Label(board[j][i]);
-//                setValignment(lbl, VPos.CENTER);
-//                setHalignment(lbl, HPos.CENTER);
-//                add(lbl, i, j);
                 if(board[j][i] == "*"){
                     emptyCell(j, i);
                 }else{
@@ -81,13 +73,6 @@ public class BoardPane extends GridPane {
                 }else{
                     filledCell(j, i, board[j][i]);
                 }
-//                pane.setAlignment(Pos.CENTER);
-//                pane.getChildren().add(lbl);
-//                pane.setOnMouseClicked(e->{
-//                    gameObservable.playerTurn(row*3+col);
-//                    System.out.println(row + " " + col + "\n");
-//                });
-//                add(pane, i, j);
             }
         }
     }
@@ -95,7 +80,8 @@ public class BoardPane extends GridPane {
     private void emptyActiveCell(int row, int col){
         StackPane pane = (StackPane) createPane();
         pane.setOnMouseClicked(e->{
-            gameObservable.playerTurn(row*3+col);
+            System.out.println("Played on place: " + (row*3+col));
+            bigBoardPane.setPlace(row*3+col);
         });
         add(pane, col, row);
     }

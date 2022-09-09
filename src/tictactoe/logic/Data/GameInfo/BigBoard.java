@@ -4,25 +4,23 @@ public class BigBoard {
 
     public final int NUM_COL = 3;
     public final int NUM_ROW = 3;
-    private final int FIRST_BOARD = 4;
 
     private Board[][] boards;
-
-    private Board selectedBoard;
-    private int selectedBoardNumber;
+    private int lastPlayedBoard;
+    private int lastRow;
+    private int lastCol;
+    private int lastPlayedPlace;
+    private int rowPlayed;
+    private int colPlayed;
 
     public BigBoard(){
         boards = new Board[NUM_ROW][NUM_COL];
         for(int i = 0; i < NUM_ROW; i++){
             for(int j = 0; j < NUM_COL; j++) {
                 boards[i][j] = new Board();
+                boards[i][j].setActive(true);
             }
         }
-
-        int row = getRow(FIRST_BOARD);
-        int col = getCol(FIRST_BOARD);
-        selectedBoard = boards[row][col];
-        selectedBoardNumber = FIRST_BOARD;
     }
 
     private int getRow(int place){
@@ -33,16 +31,24 @@ public class BigBoard {
         return place % NUM_COL;
     }
 
-    public boolean play(int place, Player player){
-        return selectedBoard.play(place, player);
+    public boolean play(int place, Player player, int playBoard){
+        lastPlayedBoard = playBoard;
+        lastPlayedPlace = place;
+        lastRow = getRow(lastPlayedBoard);
+        lastCol = getCol(lastPlayedBoard);
+        rowPlayed = getRow(lastPlayedPlace);
+        colPlayed = getCol(lastPlayedPlace);
+        setSelectedBoard();
+        System.out.println("Active player is: " + player.toString());
+        return boards[lastRow][lastCol].play(place, player);
     }
 
     public boolean checkWin(int place, Player player){
-        return selectedBoard.checkWin(place, player);
+        return boards[lastRow][lastCol].checkWin(place, player);
     }
 
     public boolean checkFull(){
-        return selectedBoard.checkFull();
+        return boards[lastRow][lastCol].checkFull();
     }
 
     public Board getBoard(int nboard){
@@ -51,30 +57,31 @@ public class BigBoard {
         return boards[row][col];
     }
 
-    public Board getSelectedBoard(){
-        return selectedBoard;
-    }
-
     public void setSelectedBoard(){
-        int row = getRow(selectedBoardNumber);
-        int col = getCol(selectedBoardNumber);
         for(int i = 0; i < NUM_ROW; i++){
             for(int j = 0; j < NUM_COL; j++){
-                if(row == i && col == j){
-                    boards[row][col].setActive(true);
+                if(rowPlayed == i && colPlayed == j){
+                    if(boards[rowPlayed][colPlayed].isWon() || boards[rowPlayed][colPlayed].checkFull()){
+                        setPossibleBoards();
+                        break;
+                    }
+                    System.out.println("Active board is: " + rowPlayed + " " + colPlayed);
+                    boards[rowPlayed][colPlayed].setActive(true);
                     continue;
                 }
-                boards[row][col].setActive(false);
+                boards[i][j].setActive(false);
             }
         }
     }
 
-    public int getSelectedBoardNumber(){
-        return selectedBoardNumber;
-    }
-
-    public void setSelectedBoardNumber(int place){
-        this.selectedBoardNumber = place;
+    private void setPossibleBoards(){
+        for(int i = 0; i < NUM_ROW; i++){
+            for(int j = 0; j < NUM_COL; j++){
+                if(!boards[i][j].isWon() && !boards[i][j].checkFull()){
+                    boards[i][j].setActive(true);
+                }
+            }
+        }
     }
 
     public String printBigBoard() {

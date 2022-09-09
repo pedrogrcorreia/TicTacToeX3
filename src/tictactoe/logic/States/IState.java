@@ -5,7 +5,7 @@ import tictactoe.logic.State;
 public interface IState {
 
     IState createNewGame(int gameMode);
-    IState playerTurn(int place);
+    IState playerTurn(int place, int playBoard);
     IState pcTurn();
 
     IState endGame();

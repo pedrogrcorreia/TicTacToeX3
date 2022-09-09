@@ -13,6 +13,7 @@ public class Board {
         board = new String[NUM_ROW][NUM_COL];
         active = true;
         full = false;
+        winner = null;
         for(int i = 0; i< NUM_ROW; i++){
             for(int j = 0; j<NUM_COL; j++){
                 board[i][j] = "*";
@@ -50,6 +51,7 @@ public class Board {
                 return false;
             }
         }
+        winner = player;
         return true;
     }
 
@@ -60,6 +62,7 @@ public class Board {
                 return false;
             }
         }
+        winner = player;
         return true;
     }
 
@@ -73,6 +76,7 @@ public class Board {
                 }
             }
         }
+        winner = player;
         return true;
     }
 
@@ -86,6 +90,7 @@ public class Board {
                 }
             }
         }
+        winner = player;
         return true;
     }
 
@@ -117,6 +122,13 @@ public class Board {
 
     public boolean getActive(){
         return active;
+    }
+
+    public boolean isWon(){
+        if(winner == null){
+            return false;
+        }
+        return true;
     }
 
     public void setActive(boolean state){

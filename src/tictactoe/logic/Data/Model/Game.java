@@ -25,8 +25,8 @@ public class Game {
         this.gameMode = gameMode;
     }
 
-    public boolean play(int place){
-        return board.play(place, activePlayer);
+    public boolean play(int place, int playBoard){
+        return board.play(place, activePlayer, playBoard);
     }
 
     public boolean checkWin(int place){
@@ -53,25 +53,12 @@ public class Game {
         nextPlayer = p;
     }
 
-    public void nextBoard(int place){
-        board.setSelectedBoardNumber(place);
-        board.setSelectedBoard();
-    }
-
     public void printBoards(){
         System.out.println(board.printBigBoard());
     }
 
     public int getGameMode(){
         return gameMode;
-    }
-
-    public Board getSelectedBoard(){
-        return board.getSelectedBoard();
-    }
-
-    public int getSelectedBoardNumber(){
-        return board.getSelectedBoardNumber();
     }
 
     public Player getWinner(){

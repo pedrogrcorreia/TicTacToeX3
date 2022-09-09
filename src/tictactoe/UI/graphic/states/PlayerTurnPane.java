@@ -29,7 +29,7 @@ public class PlayerTurnPane extends BorderPane {
     }
 
     private void createWindow(){
-        Label debug = new Label("Active board: " + gameObservable.getSelectedBoardNumber());
+        Label debug = new Label("Active board: ");
         setTop(debug);
 
         hBox = new HBox(20);

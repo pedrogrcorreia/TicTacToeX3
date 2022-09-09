@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import tictactoe.logic.Data.GameInfo.BigBoard;
+import tictactoe.logic.Data.GameInfo.Board;
 import tictactoe.logic.GameObservable;
 
 import java.io.InputStream;
@@ -14,6 +15,8 @@ import static javafx.scene.paint.Color.BLUE;
 public class BigBoardPane extends GridPane {
 
     private GameObservable gameObservable;
+    private int playBoard;
+    private int place;
 
     public BigBoardPane(GameObservable gameObservable){
         this.gameObservable = gameObservable;
@@ -42,9 +45,8 @@ public class BigBoardPane extends GridPane {
 
     private void drawBigBoard(){
         setGridLinesVisible(true);
-        int active = gameObservable.getSelectedBoardNumber();
-        int row = active / 3;
-        int col = active % 3;
+//        int row = active / 3;
+//        int col = active % 3;
 
         InputStream url = getClass().getResourceAsStream("resources/images/TicTacToe-SVG.jpeg");
         Image image = new Image(url);
@@ -54,20 +56,34 @@ public class BigBoardPane extends GridPane {
 
         for(int i = 0; i<3; i++){
             for(int j = 0; j<3; j++){
-                BoardPane b = new BoardPane(gameObservable);
-                if(row == j && col == i){
+                BoardPane b = new BoardPane(this);
+                Board board = gameObservable.getBoard(j, i);
+                if(board.getActive()){
+                    int row = j;
+                    int col = i;
                     b.setBackground(background);
-                    b.drawSelectedBoard(gameObservable.getBoard(j, i));
+                    b.drawSelectedBoard(board);
                     b.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID,
                             CornerRadii.EMPTY, new BorderWidths(3))));
+                    b.setOnMouseClicked(e->{
+                        playBoard = row*3+col;
+                        play(place);
+                    });
                     add(b, i, j);
                     continue;
                 }
-                // new Image(url)
-                b.drawBoard(gameObservable.getBoard(j, i));
+                b.drawBoard(board);
                 b.setBackground(background);
                 add(b, i, j);
             }
         }
+    }
+
+    public void setPlace(int place){
+        this.place = place;
+    }
+
+    public void play(int place){
+        gameObservable.playerTurn(place, playBoard);
     }
 }

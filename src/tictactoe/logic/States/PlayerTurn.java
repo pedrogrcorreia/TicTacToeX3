@@ -10,22 +10,26 @@ public class PlayerTurn extends StateAdapter {
     }
 
     @Override
-    public tictactoe.logic.States.IState playerTurn(int place) {
-        getGame().play(place);
+    public tictactoe.logic.States.IState playerTurn(int place, int playBoard) {
+        if(getGame().play(place, playBoard)) {
+
 //        if(getGame().play(place)) {
 //        getGame().checkWinOnBoard(place);
 //        getGame().checkWinGame(place);
             getGame().nextPlayer();
-            getGame().nextBoard(place);
+            return new PlayerTurn(getGame());
+        }else{
+            return new PlayerTurn(getGame());
+        }
 //        }else{
 //            getGame().getWinner();
 //            return new EndGame(getGame());
 //        }
-        if(getGame().getGameMode() == 0){
-            return new PlayerTurn(getGame());
-        } else{
-            return new tictactoe.logic.States.PCTurn(getGame());
-        }
+//        if(getGame().getGameMode() == 0){
+//            return new PlayerTurn(getGame());
+//        } else{
+//            return new PCTurn(getGame());
+//        }
     }
 
     @Override
