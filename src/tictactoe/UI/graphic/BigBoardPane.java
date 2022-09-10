@@ -45,9 +45,7 @@ public class BigBoardPane extends GridPane {
     }
 
     private void drawBigBoard(){
-        setGridLinesVisible(true);
-//        int row = active / 3;
-//        int col = active % 3;
+//        setGridLinesVisible(true);
 
         InputStream url = getClass().getResourceAsStream("resources/images/TicTacToe-SVG.jpeg");
         Image image = new Image(url);
@@ -68,7 +66,9 @@ public class BigBoardPane extends GridPane {
                             CornerRadii.EMPTY, new BorderWidths(3))));
                     b.setOnMouseClicked(e->{
                         playBoard = row*3+col;
-                        play(b.getPlace());
+                        if(b.isPlaceSet()) {
+                            play(b.getPlace());
+                        }
                     });
                     add(b, i, j);
                     continue;

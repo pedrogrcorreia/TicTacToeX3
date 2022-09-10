@@ -20,6 +20,7 @@ public class BoardPane extends GridPane {
 
     private BigBoardPane bigBoardPane;
     private int place;
+    private boolean placeSet = false;
 
     public BoardPane(BigBoardPane bigBoardPane) {
         this.bigBoardPane = bigBoardPane;
@@ -80,9 +81,11 @@ public class BoardPane extends GridPane {
 
     private void emptyActiveCell(int row, int col){
         StackPane pane = (StackPane) createPane();
+        placeSet = false;
         pane.setOnMouseClicked(e->{
             System.out.println("Played on place: " + (row*3+col));
             place = row*3+col;
+            placeSet = true;
         });
         add(pane, col, row);
     }
@@ -107,5 +110,9 @@ public class BoardPane extends GridPane {
 
     public int getPlace(){
         return place;
+    }
+
+    public boolean isPlaceSet(){
+        return placeSet;
     }
 }

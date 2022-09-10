@@ -13,8 +13,6 @@ public class Game {
     }
 
     private BigBoard board;
-//    private Board selectedBoard;
-//    private Board nextBoard;
 
     private Player activePlayer;
     private Player nextPlayer;
