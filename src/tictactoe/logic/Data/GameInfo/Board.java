@@ -41,6 +41,7 @@ public class Board {
             this.board[row][col] = player.toString();
             return true;
         }
+        System.out.println("You can't make this move.");
         return false;
     }
 

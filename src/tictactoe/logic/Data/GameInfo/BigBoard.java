@@ -38,7 +38,6 @@ public class BigBoard {
         lastCol = getCol(lastPlayedBoard);
         rowPlayed = getRow(lastPlayedPlace);
         colPlayed = getCol(lastPlayedPlace);
-        setSelectedBoard();
         System.out.println("Active player is: " + player.toString());
         return boards[lastRow][lastCol].play(place, player);
     }

@@ -66,4 +66,8 @@ public class Game {
     }
 
     public Board getBoard(int row, int col){ return board.getBoard(row, col); }
+
+    public void setSelectedBoard(){
+        board.setSelectedBoard();
+    }
 }

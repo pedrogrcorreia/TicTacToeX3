@@ -30,7 +30,6 @@ public class GameGraphic extends BorderPane {
     }
 
     private void update(){
-        System.out.println(gameObservable.getCurrentState());
         switch(gameObservable.getCurrentState()){
             case NEW_GAME -> setCenter(newGamePane);
             case PLAYER_TURN -> setCenter(playerTurnPane);

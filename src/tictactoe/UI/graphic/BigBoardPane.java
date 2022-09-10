@@ -15,6 +15,7 @@ import static javafx.scene.paint.Color.BLUE;
 public class BigBoardPane extends GridPane {
 
     private GameObservable gameObservable;
+
     private int playBoard;
     private int place;
 
@@ -67,7 +68,7 @@ public class BigBoardPane extends GridPane {
                             CornerRadii.EMPTY, new BorderWidths(3))));
                     b.setOnMouseClicked(e->{
                         playBoard = row*3+col;
-                        play(place);
+                        play(b.getPlace());
                     });
                     add(b, i, j);
                     continue;
@@ -85,5 +86,9 @@ public class BigBoardPane extends GridPane {
 
     public void play(int place){
         gameObservable.playerTurn(place, playBoard);
+    }
+
+    public int getPlayBoard(){
+        return playBoard;
     }
 }

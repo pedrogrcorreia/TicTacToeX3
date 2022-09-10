@@ -19,6 +19,7 @@ import java.io.InputStream;
 public class BoardPane extends GridPane {
 
     private BigBoardPane bigBoardPane;
+    private int place;
 
     public BoardPane(BigBoardPane bigBoardPane) {
         this.bigBoardPane = bigBoardPane;
@@ -81,7 +82,7 @@ public class BoardPane extends GridPane {
         StackPane pane = (StackPane) createPane();
         pane.setOnMouseClicked(e->{
             System.out.println("Played on place: " + (row*3+col));
-            bigBoardPane.setPlace(row*3+col);
+            place = row*3+col;
         });
         add(pane, col, row);
     }
@@ -102,5 +103,9 @@ public class BoardPane extends GridPane {
         StackPane pane = new StackPane();
         pane.setAlignment(Pos.CENTER);
         return pane;
+    }
+
+    public int getPlace(){
+        return place;
     }
 }

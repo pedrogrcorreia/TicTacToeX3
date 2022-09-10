@@ -17,6 +17,7 @@ public class PlayerTurn extends StateAdapter {
 //        getGame().checkWinOnBoard(place);
 //        getGame().checkWinGame(place);
             getGame().nextPlayer();
+            getGame().setSelectedBoard();
             return new PlayerTurn(getGame());
         }else{
             return new PlayerTurn(getGame());
