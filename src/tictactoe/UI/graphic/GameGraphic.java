@@ -1,5 +1,9 @@
 package tictactoe.UI.graphic;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.layout.BorderPane;
 import tictactoe.UI.graphic.states.NewGamePane;
 import tictactoe.UI.graphic.states.PlayerTurnPane;
@@ -29,10 +33,31 @@ public class GameGraphic extends BorderPane {
         gameObservable.addPropertyChangeListener("update", e->update());
     }
 
+    private void createDialog(){
+        Dialog<Boolean> dialog = new Dialog();
+        dialog.setTitle("Winner");
+        dialog.setHeaderText("Player " + gameObservable.getWinner().toString() + " won the game!");
+        dialog.setContentText("Want to play again?");
+
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+
+        dialog.setResultConverter((ButtonType button) -> {
+            if (button == ButtonType.YES) {
+                gameObservable.createNewGame(gameObservable.getGameMode());
+            } else{
+                gameObservable.endGame();
+            }
+            return null;
+        });
+        dialog.showAndWait();
+    }
+
     private void update(){
         switch(gameObservable.getCurrentState()){
             case NEW_GAME -> setCenter(newGamePane);
             case PLAYER_TURN -> setCenter(playerTurnPane);
+            case END_GAME -> createDialog();
         }
     }
 }

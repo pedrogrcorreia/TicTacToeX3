@@ -13,6 +13,8 @@ public class BigBoard {
     private int rowPlayed;
     private int colPlayed;
 
+    private Player winner;
+
     public BigBoard(){
         boards = new Board[NUM_ROW][NUM_COL];
         for(int i = 0; i < NUM_ROW; i++){
@@ -21,6 +23,7 @@ public class BigBoard {
                 boards[i][j].setActive(true);
             }
         }
+        winner = null;
     }
 
     private int getRow(int place){
@@ -48,6 +51,76 @@ public class BigBoard {
 
     public boolean checkFull(){
         return boards[lastRow][lastCol].checkFull();
+    }
+
+    public boolean checkRow(Player player){
+        int row = getRow(lastPlayedBoard);
+        for(int i = 0; i < NUM_COL; i++){
+            if(boards[row][i].getWinner() != player){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkCol(Player player){
+        int col = getCol(lastPlayedBoard);
+        for(int i = 0; i < NUM_ROW; i++){
+            if(boards[i][col].getWinner() != player){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkDiagonal(Player player){
+        for(int i = 0; i< NUM_ROW; i++){
+            for(int j = 0; j<NUM_COL; j++){
+                if(i == j){
+                    if(boards[i][j].getWinner() != player){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean checkSecDiagonal(Player player){
+        for(int i = 0; i< NUM_ROW; i++){
+            for(int j = 0; j<NUM_COL; j++){
+                if ((i + j) == (NUM_COL - 1)){
+                    if(boards[i][j].getWinner() != player){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean checkWin(Player player){
+        if(checkRow(player)){
+            System.out.println("Player " + player + " won the game!");
+            winner = player;
+            return true;
+        }
+        if(checkCol(player)){
+            System.out.println("Player " + player + " won the game!");
+            winner = player;
+            return true;
+        }
+        if(checkDiagonal(player)){
+            System.out.println("Player " + player + " won the game!");
+            winner = player;
+            return true;
+        }
+        if(checkSecDiagonal(player)){
+            System.out.println("Player " + player + " won the game!");
+            winner = player;
+            return true;
+        }
+        return false;
     }
 
     public Board getBoard(int nboard){
@@ -99,17 +172,7 @@ public class BigBoard {
         return boards[row][col];
     }
 
-    public int[][] getActiveBoards(){
-        int[][] active = new int[3][3];
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                if(boards[i][j].getActive() == true){
-                    active[i][j] = 1;
-                } else{
-                    active[i][j] = 0;
-                }
-            }
-        }
-        return active;
+    public Player getWinner(){
+        return winner;
     }
 }

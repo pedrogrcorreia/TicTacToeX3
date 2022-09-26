@@ -31,6 +31,10 @@ public class Game {
         return board.checkWinOnBoard(place, activePlayer);
     }
 
+    public boolean checkWin(){
+        return board.checkWin(activePlayer);
+    }
+
     public boolean checkFull(){
         return board.checkFull();
     }
@@ -54,7 +58,7 @@ public class Game {
     }
 
     public Player getWinner(){
-        return activePlayer;
+        return board.getWinner();
     }
 
     public Board getBoard(int row, int col){ return board.getBoard(row, col); }
@@ -63,5 +67,9 @@ public class Game {
         board.setSelectedBoard();
     }
 
-    public int[][] getActiveBoards(){ return board.getActiveBoards();}
+    public void resetGame(){
+        board = new BigBoard();
+        activePlayer = Player.PLAYER_X;
+        nextPlayer = Player.PLAYER_O;
+    }
 }

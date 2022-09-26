@@ -9,6 +9,18 @@ public class EndGame extends StateAdapter {
     }
 
     @Override
+    public IState endGame() {
+        getGame().resetGame();
+        return new NewGame(getGame());
+    }
+
+    @Override
+    public IState createNewGame(int gameMode) {
+        getGame().resetGame();
+        return new PlayerTurn(getGame());
+    }
+
+    @Override
     public State getCurrentState() {
         return State.END_GAME;
     }

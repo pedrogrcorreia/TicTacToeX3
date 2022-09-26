@@ -143,6 +143,10 @@ public class Board {
         return true;
     }
 
+    public Player getWinner(){
+        return winner;
+    }
+
     public void setActive(boolean state){
         active = state;
     }

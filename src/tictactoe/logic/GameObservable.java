@@ -1,6 +1,7 @@
 package tictactoe.logic;
 
 import tictactoe.logic.Data.GameInfo.Board;
+import tictactoe.logic.Data.GameInfo.Player;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -34,11 +35,24 @@ public class GameObservable {
         update();
     }
 
+    public void endGame(){
+        gameClient.endGame();
+        update();
+    }
+
     public State getCurrentState(){ return gameClient.getCurrentState(); }
 
     public Board getBoard(int row, int col){ return gameClient.getBoard(row, col); }
 
     public void setBoard(int nboard){
         update();
+    }
+
+    public Player getWinner(){
+        return gameClient.getWinner();
+    }
+
+    public int getGameMode(){
+        return gameClient.getGameMode();
     }
 }

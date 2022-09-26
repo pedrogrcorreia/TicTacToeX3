@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import tictactoe.logic.Data.GameInfo.Board;
+import tictactoe.logic.Data.GameInfo.Player;
 import tictactoe.logic.GameObservable;
 
 import java.io.InputStream;
@@ -42,24 +43,36 @@ public class BigBoardPane extends GridPane {
     }
 
     private void drawBigBoard(){
-//        setGridLinesVisible(true);
 
-        InputStream url = getClass().getResourceAsStream("resources/images/TicTacToe-SVG.jpeg");
-        Image image = new Image(url);
+        InputStream urlBoard = getClass().getResourceAsStream("resources/images/TicTacToe-SVG.jpeg");
+        Image imageBoard = new Image(urlBoard);
         BackgroundSize backgroundSize = new BackgroundSize(1, 1, true, true, false, false);
-        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
-        Background background = new Background(backgroundImage);
+        BackgroundImage backgroundImageBoard = new BackgroundImage(imageBoard, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background background = new Background(backgroundImageBoard);
+
+        InputStream urlX = getClass().getResourceAsStream("resources/images/X.png");
+        Image imageX = new Image(urlX);
+        BackgroundImage backgroundImageX = new BackgroundImage(imageX, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background backgroundX = new Background(backgroundImageX);
+
+        InputStream urlO = getClass().getResourceAsStream("resources/images/O.png");
+        Image imageO = new Image(urlO);
+        BackgroundImage backgroundImageO = new BackgroundImage(imageO, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background backgroundO = new Background(backgroundImageO);
 
         for(int i = 0; i<3; i++){
             for(int j = 0; j<3; j++){
                 BoardPane b = new BoardPane(this);
                 Board board = gameObservable.getBoard(j, i);
-//                try {
-//                    Thread.sleep(500);
-//                } catch (InterruptedException e) {
-//                    throw new RuntimeException(e);
-//                }
-//                System.out.println("Board " + j + " " + i + " " + board.getActive());
+                if(board.isWon()){
+                    if(board.getWinner() == Player.PLAYER_X){
+                        b.setBackground(backgroundX);
+                    } else{
+                        b.setBackground(backgroundO);
+                    }
+                    add(b, i, j);
+                    continue;
+                }
                 if(board.getActive()){
                     int row = j;
                     int col = i;

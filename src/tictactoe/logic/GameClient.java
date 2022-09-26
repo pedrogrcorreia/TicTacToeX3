@@ -1,6 +1,7 @@
 package tictactoe.logic;
 
 import tictactoe.logic.Data.GameInfo.Board;
+import tictactoe.logic.Data.GameInfo.Player;
 import tictactoe.logic.Data.Model.Game;
 import tictactoe.logic.States.IState;
 import tictactoe.logic.States.NewGame;
@@ -28,6 +29,8 @@ public class GameClient {
         setState(state.pcTurn());
     }
 
+    public void endGame() { setState(state.endGame()); }
+
     public void printBoards(){
         game.printBoards();
     }
@@ -37,4 +40,12 @@ public class GameClient {
     }
 
     public Board getBoard(int row, int col){ return game.getBoard(row, col); }
+
+    public Player getWinner(){
+        return game.getWinner();
+    }
+
+    public int getGameMode(){
+        return game.getGameMode();
+    }
 }
