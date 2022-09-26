@@ -42,7 +42,7 @@ public class BigBoard {
         return boards[lastRow][lastCol].play(place, player);
     }
 
-    public boolean checkWin(int place, Player player){
+    public boolean checkWinOnBoard(int place, Player player){
         return boards[lastRow][lastCol].checkWin(place, player);
     }
 
@@ -62,7 +62,7 @@ public class BigBoard {
                 if(rowPlayed == i && colPlayed == j){
                     if(boards[rowPlayed][colPlayed].isWon() || boards[rowPlayed][colPlayed].checkFull()){
                         setPossibleBoards();
-                        break;
+                        return;
                     }
                     System.out.println("Active board is: " + rowPlayed + " " + colPlayed);
                     boards[rowPlayed][colPlayed].setActive(true);
@@ -97,5 +97,19 @@ public class BigBoard {
 
     public Board getBoard(int row, int col){
         return boards[row][col];
+    }
+
+    public int[][] getActiveBoards(){
+        int[][] active = new int[3][3];
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(boards[i][j].getActive() == true){
+                    active[i][j] = 1;
+                } else{
+                    active[i][j] = 0;
+                }
+            }
+        }
+        return active;
     }
 }

@@ -14,10 +14,18 @@ public class PlayerTurn extends StateAdapter {
         if(getGame().play(place, playBoard)) {
 
 //        if(getGame().play(place)) {
-//        getGame().checkWinOnBoard(place);
+            getGame().checkWinOnBoard(place);
 //        getGame().checkWinGame(place);
-            getGame().nextPlayer();
+
             getGame().setSelectedBoard();
+            getGame().nextPlayer();
+            int[][] active = getGame().getActiveBoards();
+            for(int i = 0; i<3; i++){
+                for(int j = 0; j<3; j++){
+                    System.out.print(active[i][j] + " ");
+                }
+                System.out.println("\n");
+            }
             return new PlayerTurn(getGame());
         }else{
             return new PlayerTurn(getGame());

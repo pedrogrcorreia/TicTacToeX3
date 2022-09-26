@@ -97,15 +97,26 @@ public class Board {
 
     public boolean checkWin(int place, Player player){
         if(checkRow(place, player)){
+            System.out.println("Player " + player + " won!");
+            winner = player;
             return true;
         }
         if(checkCol(place, player)){
+            System.out.println("Player " + player + " won!");
+            winner = player;
             return true;
         }
         if(checkDiagonal(player)) {
+            System.out.println("Player " + player + " won!");
+            winner = player;
             return true;
         }
-        return checkSecDiagonal(player);
+        if(checkSecDiagonal(player)){
+            System.out.println("Player " + player + " won!");
+            winner = player;
+            return true;
+        }
+        return false;
     }
 
     public boolean checkFull(){

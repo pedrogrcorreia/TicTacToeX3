@@ -4,13 +4,10 @@ import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import tictactoe.logic.Data.GameInfo.BigBoard;
 import tictactoe.logic.Data.GameInfo.Board;
 import tictactoe.logic.GameObservable;
 
 import java.io.InputStream;
-
-import static javafx.scene.paint.Color.BLUE;
 
 public class BigBoardPane extends GridPane {
 
@@ -57,6 +54,12 @@ public class BigBoardPane extends GridPane {
             for(int j = 0; j<3; j++){
                 BoardPane b = new BoardPane(this);
                 Board board = gameObservable.getBoard(j, i);
+//                try {
+//                    Thread.sleep(500);
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                System.out.println("Board " + j + " " + i + " " + board.getActive());
                 if(board.getActive()){
                     int row = j;
                     int col = i;

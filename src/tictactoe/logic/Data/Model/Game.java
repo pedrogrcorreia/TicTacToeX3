@@ -27,8 +27,8 @@ public class Game {
         return board.play(place, activePlayer, playBoard);
     }
 
-    public boolean checkWin(int place){
-        return board.checkWin(place, activePlayer);
+    public boolean checkWinOnBoard(int place){
+        return board.checkWinOnBoard(place, activePlayer);
     }
 
     public boolean checkFull(){
@@ -36,12 +36,6 @@ public class Game {
     }
 
     public boolean playPC(){
-//        Random r = new Random();
-//        int place = r.nextInt(9+1);
-//        selectedBoard = nextBoard;
-//        selectedBoard.play(place, activePlayer);
-//        nextBoard = board.getBoard(place);
-//        return selectedBoard.checkWin(place, activePlayer);
         return true;
     }
 
@@ -68,4 +62,6 @@ public class Game {
     public void setSelectedBoard(){
         board.setSelectedBoard();
     }
+
+    public int[][] getActiveBoards(){ return board.getActiveBoards();}
 }
