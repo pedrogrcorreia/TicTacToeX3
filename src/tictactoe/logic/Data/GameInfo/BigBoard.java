@@ -135,6 +135,8 @@ public class BigBoard implements Serializable {
     }
 
     public void setSelectedBoard(){
+        System.out.println("rowPlayed " + rowPlayed);
+        System.out.println("colPlayed " + colPlayed);
         for(int i = 0; i < NUM_ROW; i++){
             for(int j = 0; j < NUM_COL; j++){
                 if(rowPlayed == i && colPlayed == j){

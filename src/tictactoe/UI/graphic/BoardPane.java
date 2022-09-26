@@ -14,6 +14,7 @@ import tictactoe.logic.Data.GameInfo.Board;
 import tictactoe.logic.GameObservable;
 
 import java.io.InputStream;
+import java.util.Objects;
 
 
 public class BoardPane extends GridPane {
@@ -52,7 +53,7 @@ public class BoardPane extends GridPane {
         for(int i = 0; i<3; i++){
             for(int j = 0; j<3; j++){
                 String[][] board = b.getStringBoard();
-                if(board[j][i] == "*"){
+                if(board[j][i] == " "){
                     emptyCell(j, i);
                 }else{
                     filledCell(j, i, board[j][i]);
@@ -70,7 +71,7 @@ public class BoardPane extends GridPane {
         for(int i = 0; i<3; i++){
             for(int j = 0; j<3; j++){
                 String[][] board = b.getStringBoard();
-                if(board[j][i] == " "){
+                if(Objects.equals(board[j][i], " ")){
                     emptyActiveCell(j, i);
                 }else{
                     filledCell(j, i, board[j][i]);

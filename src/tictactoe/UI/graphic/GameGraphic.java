@@ -120,11 +120,22 @@ public class GameGraphic extends BorderPane {
         });
 
         rules.setOnAction(e-> {
-            new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK);
+            a.setTitle("Ultimate TicTacToe");
+            a.setHeaderText("Ultimate TicTacToe Rules");
+            a.setContentText("First move: You can play on every board.\n" +
+                    "Each place you play, the next board will be that one.\n" +
+                    "If already won or full, all boards that could be playable will be active.\n" +
+                    "When a player wins a board, it will change to it's symbol.\n" +
+                    "The player that can make a winning combinations of boards, wins the game!");
+            a.show();
         });
 
         author.setOnAction(e-> {
-            new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "Developer: Pedro Correia\nhttps://github.com/pedrogrcorreia", ButtonType.OK);
+            a.setTitle("Author");
+            a.setHeaderText("About the author");
+            a.show();
         });
 
         quitGame.setOnAction(e-> {
@@ -133,7 +144,16 @@ public class GameGraphic extends BorderPane {
         });
 
         quitSave.setOnAction(e-> {
-            new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File("./"));
+            File selectedFile = fileChooser.showSaveDialog(null);
+            if(selectedFile != null){
+                if(!gameObservable.saveGame(selectedFile)){
+                    new Alert(Alert.AlertType.ERROR, "Error saving the game", ButtonType.OK).show();
+                }
+            }
+            Stage window = (Stage) this.getScene().getWindow();
+            fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));
         });
     }
 
