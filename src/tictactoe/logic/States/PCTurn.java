@@ -10,9 +10,16 @@ public class PCTurn extends tictactoe.logic.States.StateAdapter {
 
     @Override
     public IState pcTurn() {
-        getGame().playPC();
-        getGame().nextPlayer();
-        return new tictactoe.logic.States.PlayerTurn(getGame());
+        if(getGame().playPC()){
+            getGame().checkWinOnBoard(getGame().getRandomPlace());
+            if(getGame().checkWin()){
+                return endGame();
+            }
+            getGame().setSelectedBoard();
+            getGame().nextPlayer();
+            return new PlayerTurn(getGame());
+        }
+        return new PCTurn(getGame());
     }
 
     @Override

@@ -10,26 +10,29 @@ public class PlayerTurn extends StateAdapter {
 
     @Override
     public IState playerTurn(int place, int playBoard) {
-        if(getGame().play(place, playBoard)) {
-            getGame().checkWinOnBoard(place);
-            if(getGame().checkWin()){
-                return new EndGame(getGame());
+        if(getGame().getGameMode() == 0) {
+            if (getGame().play(place, playBoard)) {
+                getGame().checkWinOnBoard(place);
+                if (getGame().checkWin()) {
+                    return new EndGame(getGame());
+                }
+                getGame().setSelectedBoard();
+                getGame().nextPlayer();
+                return new PlayerTurn(getGame());
             }
-            getGame().setSelectedBoard();
-            getGame().nextPlayer();
             return new PlayerTurn(getGame());
-        }else{
+        } else{
+            if(getGame().play(place, playBoard)){
+                getGame().checkWinOnBoard(place);
+                if (getGame().checkWin()) {
+                    return new EndGame(getGame());
+                }
+                getGame().setSelectedBoard();
+                getGame().nextPlayer();
+                return new PCTurn(getGame());
+            }
             return new PlayerTurn(getGame());
         }
-//        }else{
-//            getGame().getWinner();
-//            return new EndGame(getGame());
-//        }
-//        if(getGame().getGameMode() == 0){
-//            return new PlayerTurn(getGame());
-//        } else{
-//            return new PCTurn(getGame());
-//        }
     }
 
     @Override

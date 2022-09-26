@@ -4,6 +4,8 @@ import tictactoe.logic.Data.GameInfo.BigBoard;
 import tictactoe.logic.Data.GameInfo.Board;
 import tictactoe.logic.Data.GameInfo.Player;
 
+import java.util.Random;
+
 public class Game {
 
     public Game(){
@@ -16,6 +18,9 @@ public class Game {
 
     private Player activePlayer;
     private Player nextPlayer;
+
+    private int randomPlace;
+    private int randomBoard;
 
     private int gameMode;
 
@@ -40,7 +45,10 @@ public class Game {
     }
 
     public boolean playPC(){
-        return true;
+        Random r = new Random();
+        randomPlace = r.nextInt(9);
+        randomBoard = r.nextInt(9);
+        return board.play(randomPlace, activePlayer, randomBoard);
     }
 
     public void nextPlayer(){
@@ -62,6 +70,10 @@ public class Game {
     }
 
     public Board getBoard(int row, int col){ return board.getBoard(row, col); }
+
+    public int getRandomPlace(){
+        return randomPlace;
+    }
 
     public void setSelectedBoard(){
         board.setSelectedBoard();

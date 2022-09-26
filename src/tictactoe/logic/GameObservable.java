@@ -35,6 +35,11 @@ public class GameObservable {
         update();
     }
 
+    public void pcTurn(){
+        gameClient.pcTurn();
+        update();
+    }
+
     public void endGame(){
         gameClient.endGame();
         update();

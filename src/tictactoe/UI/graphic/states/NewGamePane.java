@@ -1,5 +1,6 @@
 package tictactoe.UI.graphic.states;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -22,8 +23,8 @@ public class NewGamePane extends BorderPane {
     }
 
     private void createWindow(){
-        btnSingle = new Button("Single Player");
-        btnMulti = new Button("Multiplayer");
+        btnSingle = new Button("Multi Player");
+        btnMulti = new Button("Single Player (vs PC)");
 
         btnSingle.setOnAction(e -> gameObservable.createNewGame(0));
 
@@ -32,6 +33,7 @@ public class NewGamePane extends BorderPane {
         layout = new VBox(10);
         layout.setSpacing(20);
         layout.getChildren().addAll(btnSingle, btnMulti);
+        layout.setAlignment(Pos.CENTER);
 
         setCenter(layout);
     }

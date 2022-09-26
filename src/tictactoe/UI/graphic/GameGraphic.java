@@ -1,6 +1,5 @@
 package tictactoe.UI.graphic;
 
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
@@ -58,6 +57,7 @@ public class GameGraphic extends BorderPane {
             case NEW_GAME -> setCenter(newGamePane);
             case PLAYER_TURN -> setCenter(playerTurnPane);
             case END_GAME -> createDialog();
+            case PC_TURN -> gameObservable.pcTurn();
         }
     }
 }

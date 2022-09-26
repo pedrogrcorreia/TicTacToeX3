@@ -42,6 +42,9 @@ public class BigBoard {
         rowPlayed = getRow(lastPlayedPlace);
         colPlayed = getCol(lastPlayedPlace);
         System.out.println("Active player is: " + player.toString());
+        if(boards[lastRow][lastCol].getActive() == false){
+            return false;
+        }
         return boards[lastRow][lastCol].play(place, player);
     }
 
@@ -174,5 +177,19 @@ public class BigBoard {
 
     public Player getWinner(){
         return winner;
+    }
+
+    public int[][] getActiveBoards(){
+        int[][] active = new int[3][3];
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(boards[i][j].getActive()){
+                    active[i][j] = 1;
+                } else{
+                    active[i][j] = 0;
+                }
+            }
+        }
+        return active;
     }
 }
