@@ -1,9 +1,9 @@
 package tictactoe.UI.graphic;
 
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import tictactoe.UI.graphic.states.NewGamePane;
 import tictactoe.UI.graphic.states.PlayerTurnPane;
 import tictactoe.logic.GameObservable;
@@ -14,6 +14,14 @@ public class GameGraphic extends BorderPane {
 
     private NewGamePane newGamePane;
     private PlayerTurnPane playerTurnPane;
+
+    private MenuItem load;
+    private MenuItem save;
+    private MenuItem rules;
+    private MenuItem author;
+    private MenuItem quitGame;
+    private MenuItem quitSave;
+
 
     public GameGraphic(GameObservable gameObservable){
         this.gameObservable = gameObservable;
@@ -26,6 +34,33 @@ public class GameGraphic extends BorderPane {
         newGamePane = new NewGamePane(gameObservable);
         playerTurnPane = new PlayerTurnPane(gameObservable);
         setCenter(newGamePane);
+
+        MenuBar menuBar = new MenuBar();
+        setTop(menuBar);
+
+        Menu file = new Menu("_File");
+
+        load = new MenuItem("Load game");
+        save = new MenuItem("Save game");
+        file.getItems().addAll(load, save);
+
+        Menu about = new Menu("_About");
+
+        rules = new MenuItem("Rules");
+        author = new MenuItem("Author");
+
+        about.getItems().addAll(rules, author);
+
+        Menu quit = new Menu("_Quit");
+
+        quitGame = new MenuItem("Quit");
+        quitSave = new MenuItem("Quit and Save");
+
+        quit.getItems().addAll(quitGame, quitSave);
+
+        createMenuActions();
+
+        menuBar.getMenus().addAll(file, about, quit);
     }
 
     private void registerObserver(){
@@ -50,6 +85,33 @@ public class GameGraphic extends BorderPane {
             return null;
         });
         dialog.showAndWait();
+    }
+
+    private void createMenuActions(){
+        load.setOnAction(e-> {
+            new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+        });
+
+        save.setOnAction(e-> {
+            new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+        });
+
+        rules.setOnAction(e-> {
+            new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+        });
+
+        author.setOnAction(e-> {
+            new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+        });
+
+        quitGame.setOnAction(e-> {
+            Stage window = (Stage) this.getScene().getWindow();
+            fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));
+        });
+
+        quitSave.setOnAction(e-> {
+            new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+        });
     }
 
     private void update(){
