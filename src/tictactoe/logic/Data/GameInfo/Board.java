@@ -1,6 +1,8 @@
 package tictactoe.logic.Data.GameInfo;
 
-public class Board {
+import java.io.Serializable;
+
+public class Board implements Serializable {
 
     private final int NUM_COL = 3;
     private final int NUM_ROW = 3;
@@ -16,7 +18,7 @@ public class Board {
         winner = null;
         for(int i = 0; i< NUM_ROW; i++){
             for(int j = 0; j<NUM_COL; j++){
-                board[i][j] = "*";
+                board[i][j] = " ";
             }
         }
     }
@@ -37,7 +39,7 @@ public class Board {
     public boolean play(int place, Player player){
         int row = place / NUM_COL;
         int col = place % NUM_COL;
-        if(this.board[row][col] == "*"){
+        if(this.board[row][col] == " "){
             this.board[row][col] = player.toString();
             return true;
         }
@@ -122,7 +124,7 @@ public class Board {
     public boolean checkFull(){
         for(int i = 0; i< NUM_ROW; i++){
             for(int j = 0; j<NUM_COL; j++){
-                if(board[i][j] == "*"){
+                if(board[i][j] == " "){
                     return false;
                 }
             }

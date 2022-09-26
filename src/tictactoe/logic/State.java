@@ -1,6 +1,8 @@
 package tictactoe.logic;
 
-public enum State {
+import java.io.Serializable;
+
+public enum State implements Serializable {
     NEW_GAME,
     PLAYER_TURN,
     PC_TURN,

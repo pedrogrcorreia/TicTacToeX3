@@ -6,7 +6,9 @@ import tictactoe.logic.Data.Model.Game;
 import tictactoe.logic.States.IState;
 import tictactoe.logic.States.NewGame;
 
-public class GameClient {
+import java.io.Serializable;
+
+public class GameClient implements Serializable {
     private Game game;
     private IState state;
 

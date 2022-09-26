@@ -3,7 +3,9 @@ package tictactoe.logic.States;
 import tictactoe.logic.Data.Model.Game;
 import tictactoe.logic.State;
 
-public class PlayerTurn extends StateAdapter {
+import java.io.Serializable;
+
+public class PlayerTurn extends StateAdapter implements Serializable {
     public PlayerTurn(Game game) {
         super(game);
     }

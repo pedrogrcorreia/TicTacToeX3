@@ -1,6 +1,10 @@
 package tictactoe.logic.Data.GameInfo;
 
-public enum Player {
+import tictactoe.logic.Util.Save;
+
+import java.io.Serializable;
+
+public enum Player implements Serializable {
     PLAYER_X("X"),
     PLAYER_O("O"),
     TIE("T");

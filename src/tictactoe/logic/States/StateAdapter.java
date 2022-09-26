@@ -2,7 +2,9 @@ package tictactoe.logic.States;
 
 import tictactoe.logic.Data.Model.Game;
 
-public abstract class StateAdapter implements IState {
+import java.io.Serializable;
+
+public abstract class StateAdapter implements IState, Serializable {
     private final Game game;
 
     public StateAdapter(Game game){

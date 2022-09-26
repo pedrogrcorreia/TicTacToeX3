@@ -1,6 +1,8 @@
 package tictactoe.logic.Data.GameInfo;
 
-public class BigBoard {
+import java.io.Serializable;
+
+public class BigBoard implements Serializable {
 
     public final int NUM_COL = 3;
     public final int NUM_ROW = 3;

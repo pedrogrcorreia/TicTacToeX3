@@ -46,9 +46,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args){
-//        GameClient gameClient = new GameClient();
-//        ConsoleUI consoleUI = new ConsoleUI(gameClient);
-//        consoleUI.run();
         launch(args);
     }
 }

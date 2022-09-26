@@ -70,7 +70,7 @@ public class BoardPane extends GridPane {
         for(int i = 0; i<3; i++){
             for(int j = 0; j<3; j++){
                 String[][] board = b.getStringBoard();
-                if(board[j][i] == "*"){
+                if(board[j][i] == " "){
                     emptyActiveCell(j, i);
                 }else{
                     filledCell(j, i, board[j][i]);

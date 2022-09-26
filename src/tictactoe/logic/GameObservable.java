@@ -5,6 +5,8 @@ import tictactoe.logic.Data.GameInfo.Player;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.File;
+import tictactoe.logic.Util.*;
 
 public class GameObservable {
     private GameClient gameClient;
@@ -59,5 +61,19 @@ public class GameObservable {
 
     public int getGameMode(){
         return gameClient.getGameMode();
+    }
+
+    public boolean loadGame(File filename){
+        GameClient aux = Load.loadGame(filename);
+        if(aux != null){
+            gameClient = aux;
+            update();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean saveGame(File filename){
+        return Save.saveGame(gameClient, filename);
     }
 }

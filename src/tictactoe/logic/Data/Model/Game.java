@@ -4,9 +4,10 @@ import tictactoe.logic.Data.GameInfo.BigBoard;
 import tictactoe.logic.Data.GameInfo.Board;
 import tictactoe.logic.Data.GameInfo.Player;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Game {
+public class Game implements Serializable {
 
     public Game(){
         board = new BigBoard();

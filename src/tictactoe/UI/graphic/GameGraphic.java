@@ -2,11 +2,14 @@ package tictactoe.UI.graphic;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import tictactoe.UI.graphic.states.NewGamePane;
 import tictactoe.UI.graphic.states.PlayerTurnPane;
 import tictactoe.logic.GameObservable;
+
+import java.io.File;
 
 public class GameGraphic extends BorderPane {
 
@@ -89,11 +92,31 @@ public class GameGraphic extends BorderPane {
 
     private void createMenuActions(){
         load.setOnAction(e-> {
-            new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+            //new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File("./"));
+            File selectedFile = fileChooser.showOpenDialog(null);
+            if(selectedFile != null){
+                try{
+                    if(!gameObservable.loadGame(selectedFile)){
+                        new Alert(Alert.AlertType.ERROR, "Error loading game!", ButtonType.OK).show();
+                    }
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
         });
 
         save.setOnAction(e-> {
-            new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+            //new Alert(Alert.AlertType.INFORMATION, "To be developed", ButtonType.OK).show();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File("./"));
+            File selectedFile = fileChooser.showSaveDialog(null);
+            if(selectedFile != null){
+                if(!gameObservable.saveGame(selectedFile)){
+                    new Alert(Alert.AlertType.ERROR, "Error saving the game", ButtonType.OK).show();
+                }
+            }
         });
 
         rules.setOnAction(e-> {
