@@ -67,7 +67,6 @@ public class BoardPane extends GridPane {
         Image x = new Image(xurl);
         InputStream ourl = getClass().getResourceAsStream("resources/images/O.png");
         Image o = new Image(ourl);
-        setGridLinesVisible(true);
         for(int i = 0; i<3; i++){
             for(int j = 0; j<3; j++){
                 String[][] board = b.getStringBoard();

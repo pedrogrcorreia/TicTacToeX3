@@ -78,7 +78,7 @@ public class BigBoardPane extends GridPane {
                     int col = i;
                     b.setBackground(background);
                     b.drawSelectedBoard(board);
-                    b.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID,
+                    b.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
                             CornerRadii.EMPTY, new BorderWidths(3))));
                     b.setOnMouseClicked(e->{
                         playBoard = row*3+col;
